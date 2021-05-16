@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+            <style>h1 {
+                
+                color: black;
+                text-align: center;
+            }
+                input[type=text] {
+                    width: 400px;
+                
+                border-bottom: 2px solid rgb(8, 5, 5);
+                
+                color:black;
+                
+                }  
+                input[type=button]{
+                    color: black;
+                    background-color:rgb(233, 233, 243);
+                
+                    text-align: center;
+
+                }     
+                img{
+                    float: left;
+                    shape-margin: inherit;
+                    border-radius: 50%;
+                    border: 10px rgb(8, 5, 5);
+
+                }          
+                form{
+                    padding-top: 100px;
+                }
+                
+                
+                table {
+  font-family: arial, sans-serif;
+  
+  border-width: 2px;
+  border-color: black;
+  border-radius: 2px;
+  width: 50%;
+}
+
+td, th {
+  border: 2.5px solid #000000;
+  text-align:left;
+  padding: 5px;
+}
+.a:hover{
+    background-color:royalblue;
+
+}
+
+
+
+
+</style>
+    </head>
+    
+    <link rel="manifest" href="manifest.json">
+    <body style="background-color: rgb(215, 230, 233);">
+        <h1>Github Profile Details</h1>
+        <center>
+        <form>
+        <input class="form-control" type="text" id="text_input" ><br>
+        <br>
+        <input type="button" class="btn btn-info" onclick="gitdata()" value="Get Profile">
+        </form>
+    </center>
+        <div id='git_image'>
+            <img src="" alt="profile image" id="image">
+            <id='para'>
+        </div>
+        <form  style="padding-left: 100px;">  
+        <table border="2">
+            
+                                
+        
+        <tr>
+            <td>Name<td><p id='demo'></p></td></td></tr>
+            <tr><td>Node_id <td><p id='demo6'></p></td></td></tr>
+            <tr><td>Followers <td><p id='demo11'></p></td></td></tr>
+            <tr><td>Following <td><p id='demo2'></p></td></td>
+            <tr><td>ID <td><p id='demo3'></p></td></td></tr>
+            <tr><td>Location <td><p id='demo4'></p></td></td></tr>
+           <tr><td>Avatar URL <td><a href="Click here"<p id='demo5'></p></a></td></td></tr>
+        
+        </table>
+
+    </form>
+        </center>
+        
+    </center>
+    </body>
+<script>
+    function gitdata(){
+
+    var url='https://api.github.com/users/'+document.getElementById('text_input').value;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.avatar_url)
+        var im = document.getElementById("image");
+        im.setAttribute("src",data.avatar_url);
+        
+        
+        document.getElementById("demo").innerHTML = data.login;
+        document.getElementById("demo11").innerHTML = data.followers;
+        document.getElementById("demo2").innerHTML = data.following;
+        document.getElementById("demo3").innerHTML = data.id;
+        document.getElementById("demo4").innerHTML = data.location;
+        document.getElementById("demo5").innerHTML= data.avatar_url;
+        document.getElementById("demo6").innerHTML = data.node_id;
+        document.getElementById("demo7").innerHtml= data.url;
+        document.getElementById("demo8").innerHTML= data.html_url;
+        document.getElementById("profile").innerHTML= data.html_url;
+        
+
+    })
+
+    .catch(function(response){
+        return response.status;
+        console.log(response.status);
+    });;
+    
+}
+</script>
+</html>
